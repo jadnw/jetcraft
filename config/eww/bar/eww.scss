@@ -1,0 +1,65 @@
+@import "../palette.scss";
+
+* {
+  all: unset;
+}
+
+.bar {
+  background-color: transparent;
+}
+
+.bar-wrapper {
+  padding: 4px 8px;
+  background-color: $bg0;
+  color: $accent;
+}
+
+.workspaces {
+  font-family: Material Icons Round;
+  font-size: 22px;
+}
+
+.workspace-one,
+.workspace-two,
+.workspace-three,
+.workspace-four,
+.workspace-five,
+.workspace-six {
+  padding: 0px 8px;
+}
+
+.clock {
+  font-family: Jetka;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.clock-hour,
+.clock-min {
+  padding: 0px 6px;
+  background-color: $bg2;
+  color: $fg0;
+  border-radius: 4px;
+}
+
+.clock-hour {
+  margin-right: 4px;
+}
+
+.launcher {
+  padding: 0 4px;
+  font-family: Material Icons Round;
+  font-size: 18px;
+  background-color: $accent;
+  color: $bg1;
+  border-radius: 4px;
+}
+
+.power {
+  padding: 0 4px;
+  font-family: Material Icons Round;
+  font-size: 18px;
+  background-color: $red;
+  color: $bg1;
+  border-radius: 4px;
+}

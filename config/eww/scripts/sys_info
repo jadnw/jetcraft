@@ -1,0 +1,55 @@
+#!/bin/fish
+
+function get_vol
+  pamixer --get-volume
+end
+
+function set_vol
+  pamixer --set-volume $argv[1]
+end
+
+function toggle_mute
+  pamixer --toggle-mute
+end
+
+function get_vol_icon
+  set MUTE (pamixer --get-mute)
+  if test "$MUTE" = "false"
+	  echo "墳"
+  else
+    echo "婢"
+  end
+end
+
+function get_mic_icon
+  set MUTE (pamixer --source 0 --get-mute)
+  if test "$MUTE" = "false"
+	  echo ""
+  else
+    echo ""
+  end
+end
+
+function get_network_icon
+  set CONNECTED (nmcli connection show --active)
+  if test -z "$CONNECTED"
+    echo ""
+  else
+    echo ""
+  end
+end
+
+switch $argv[1]
+  case get_vol
+    get_vol
+  case set_vol
+    set_vol
+  case toggle_mute
+    toggle_mute
+  case get_vol_icon
+    get_vol_icon
+  case get_mic_icon
+    get_mic_icon
+  case get_network_icon
+    get_network_icon
+end

@@ -1,0 +1,40 @@
+(deflisten workspaces
+  :initial "(box :class \"workspaces\" :space-evenly \"true\" (button :class \"workspace-one\" :onclick \"hyprland dispatch workspace 1\" (label :text \"\")) (button :class \"workspace-two\" :onclick \"hyprland dispatch workspace 2\" (label :text \"\")) (button :class \"workspace-three\" :onclick \"hyprland dispatch workspace 3\" (label :text \"\")) (button :class \"workspace-four\" :onclick \"hyprland dispatch workspace 4\" (label :text \"\")) (button :class \"workspace-five\" :onclick \"hyprland dispatch workspace 5\" (label :text \"\")) (button :class \"workspace-six\" :onclick \"hyprland dispatch workspace 6\" (label :text \"\")))"
+  `../scripts/workspaces`
+)
+
+(defpoll hour :interval "60s"
+	`date +"%H"`)
+
+(defpoll min :interval "60s"
+	`date +"%M"`)
+
+(defwidget clock [hour min]
+  (box :class "clock" :space-evenly "true"
+    (button :class "clock-hour" :onclick "./scripts/launch-calendar"
+      (label :text "${hour}"))
+    (button :class "clock-min" :onclick "./scripts/launch-calendar"
+      (label :text "${min}"))
+  )
+)
+
+(defwidget launcher []
+  (box :space-evenly "false" (button :class "launcher" :onclick "~/.config/thunderjet/launcher toggle" :tooltip "Applications" ""))
+)
+
+(defwidget power []
+  (box :space-evenly "false" (button :class "power" :onclick "~/.config/thunderjet/powermenu toggle" :tooltip "Quit" ""))
+)
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :stacking "fg"
+  :geometry (geometry :width "100%" :anchor "bottom center")
+  :exclusive true
+  (box :class "bar-wrapper" :space-evenly "true"
+    (box :halign "start" :space-evenly "false" :spacing 8 (launcher))
+    (box :halign "center" (literal :content "${workspaces}"))
+    (box :halign "end" :space-evenly "false" :spacing 8 (clock :hour "${hour}" :min "${min}") (power))
+  )
+)
