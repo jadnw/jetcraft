@@ -1,5 +1,5 @@
 (deflisten workspaces
-  :initial "(box :class \"workspaces\" :space-evenly \"true\" (button :class \"workspace-one\" :onclick \"hyprland dispatch workspace 1\" (label :text \"\")) (button :class \"workspace-two\" :onclick \"hyprland dispatch workspace 2\" (label :text \"\")) (button :class \"workspace-three\" :onclick \"hyprland dispatch workspace 3\" (label :text \"\")) (button :class \"workspace-four\" :onclick \"hyprland dispatch workspace 4\" (label :text \"\")) (button :class \"workspace-five\" :onclick \"hyprland dispatch workspace 5\" (label :text \"\")) (button :class \"workspace-six\" :onclick \"hyprland dispatch workspace 6\" (label :text \"\")))"
+  :initial "(eventbox :onscroll \"../scripts/cycleworkspace {}\" (box :class \"workspaces\" :space-evenly \"true\" (button :class \"workspace-one\" :onclick \"hyprctl dispatch workspace 1\" \"\") (button :class \"workspace-two\" :onclick \"hyprctl dispatch workspace 2\" \"\") (button :class \"workspace-three\" :onclick \"hyprctl dispatch workspace 3\" \"\") (button :class \"workspace-four\" :onclick \"hyprctl dispatch workspace 4\" \"\") (button :class \"workspace-five\" :onclick \"hyprctl dispatch workspace 5\" \"\") (button :class \"workspace-six\" :onclick \"hyprctl dispatch workspace 6\" \"\")))"
   `../scripts/workspaces`
 )
 
@@ -11,10 +11,8 @@
 
 (defwidget clock [hour min]
   (box :class "clock" :space-evenly "true"
-    (button :class "clock-hour" :onclick "./scripts/launch-calendar"
-      (label :text "${hour}"))
-    (button :class "clock-min" :onclick "./scripts/launch-calendar"
-      (label :text "${min}"))
+    (button :class "clock-hour" :onclick "./scripts/launch-calendar" "${hour}")
+    (button :class "clock-min" :onclick "./scripts/launch-calendar" "${min}")
   )
 )
 
