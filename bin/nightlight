@@ -1,28 +1,20 @@
 #!/bin/fish
 
-set pid (pgrep wlsunset)
-
-function markup
-  if test -n "$pid"
-    echo '{ "text": "", "tooltip": "Nightlight: ON", "class": "nightlight-active" }'
-  else
-    echo '{ "text": "", "tooltip": "Nightlight: OFF", "class": "nightlight" }'
-  end
-end
+set bar eww --config ~/.config/eww/bar
 
 function toggle
+  set pid (pgrep wlsunset)
+
   if test -n "$pid"
     pkill -SIGKILL wlsunset
+    $bar update nightlight_icon=""
   else
-    wlsunset -t 4500 -T 5500 &
+    wlsunset -t 5250 -T 6250 &
+    $bar update nightlight_icon=""
   end
- 
-  pkill -SIGRTMIN+4 waybar
 end
 
 switch $argv[1]
   case ''
-    markup
-  case toggle
     toggle
 end

@@ -10,7 +10,7 @@
  */
 
 configuration {
-  font:                           "Jetka Medium 11";
+  font:                           "Jetka Semibold 11";
   show-icons:                     true;
   icon-theme:                     "Papirus-Dark";
   display-drun:                   "Applications";
@@ -19,7 +19,7 @@ configuration {
   sidebar-mode:                   false;
 }
 
-@import "../theme.rasi"
+@import "./theme.rasi"
 
 window {
   transparency:                   "real";
@@ -29,18 +29,18 @@ window {
   border-color:                   @accent;
   border-radius:                  4px;
   width:                          800px;
-  location:                       southwest;
-  x-offset:                       -4px;
-  y-offset:                       -4px;
+  location:                       center;
+  x-offset:                       0px;
+  y-offset:                       0px;
 }
 
 prompt {
   enabled:                        true;
   padding:                        1% 0.75% 1% 0.75%;
   background-color:               @accent;
-  text-color:                     @bg0;
+  text-color:                     @bg1;
   border-radius:                  4px;
-  font:                           "Jetka Medium 11";
+  font:                           "Jetka Semibold 11";
 }
 
 textbox-prompt-colon {
@@ -53,7 +53,7 @@ textbox-prompt-colon {
 
 entry {
   background-color:               @none;
-  text-color:                     @gray;
+  text-color:                     @fg1;
   placeholder-color:              @gray;
   expand:                         true;
   horizontal-align:               0;
@@ -76,7 +76,7 @@ listview {
   background-color:               @none;
   padding:                        0px;
   columns:                        2;
-  lines:                          8;
+  lines:                          12;
   spacing:                        1%;
   cycle:                          false;
   dynamic:                        true;

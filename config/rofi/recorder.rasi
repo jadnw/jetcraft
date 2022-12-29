@@ -11,12 +11,12 @@
 
 configuration {
   show-icons:                     false;
-  font:                           "Jetka Medium 11";
+  font:                           "Jetka Semibold 11";
   disable-history:                false;
   sidebar-mode:                   false;
 }
 
-@import "../theme.rasi"
+@import "./theme.rasi"
 
 * {
   background-color:               @bg0;
@@ -28,26 +28,26 @@ window {
   border-radius:                  4px;
   border:                         1px;
   border-color:                   @bg2;
-  location:                       southeast;
-  width:                          300px;
-  x-offset:                       -4px;
-  y-offset:                       -4px;
+  location:                       center;
+  width:                          360px;
+  x-offset:                       0px;
+  y-offset:                       0px;
 }
 
 prompt {
   enabled:                        true;
   padding:                        5px;
   background-color:               @bg1;
-  text-color:                     @cyan;
+  text-color:                     @magenta;
   border:                         0px 2px 0px 2px;
   border-radius:                  4px;
-  border-color:                   @cyan;
+  border-color:                   @magenta;
 }
 
 textbox-prompt-colon {
   expand:                         false;
-  str:                            "Colorpicker";
-  background-color:               @cyan;
+  str:                            "Screencast";
+  background-color:               @magenta;
   text-color:                     @bg0;
   padding:                        5px;
   border-radius:                  4px;
@@ -61,7 +61,7 @@ inputbar {
   expand:                         false;
   border:                         0px;
   border-radius:                  0px;
-  border-color:                   @cyan;
+  border-color:                   @magenta;
   margin:                         0px 0px 0px 0px;
   padding:                        0px;
   position:                       center;
@@ -93,11 +93,11 @@ element {
 element-text {
   background-color:               inherit;
   text-color:                     inherit;
-  font:                           "Material Icons Round 20";
+  font:                           "Material Icons Round 28";
   expand:                         true;
   horizontal-align:               0.5;
   vertical-align:                 0.5;
-  margin:                         19px 10px 19px 10px;
+  margin:                         30px 15px 30px 15px;
 }
 
 element normal.urgent,
@@ -108,23 +108,14 @@ element alternate.urgent {
 
 element normal.active,
 element alternate.active {
-  background-color:               @cyan;
+  background-color:               @magenta;
   text-color:                     @bg0;
 }
 
 element selected {
-  background-color:               @cyan;
+  background-color:               @magenta;
   text-color:                     @bg0;
   border:                         0px 2px 0px 2px;
   border-radius:                  4px;
-  border-color:                   @cyan;
-}
-
-element selected.urgent {
-  background-color:               @cyan;
-  text-color:                     @bg0;
-}
-
-element selected.active {
-  color:                          @bg0;
+  border-color:                   @magenta;
 }

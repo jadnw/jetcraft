@@ -1,56 +1,36 @@
 #!/bin/fish
 
-set marker /tmp/waybar-screenshot
-set theme ~/.config/rofi/configs/screenshot.rasi
-set savepath (xdg-user-dir PICTURES)/screenshots
-mkdir -p $savepath
-
-function markup
-  if test -e $marker
-    echo '{ "text": "", "tooltip": "Close Overlay", "class": "screenshot-active" }'
-  else
-    echo '{ "text": "", "tooltip": "Screenshot", "class": "screenshot" }'
-  end
-end
-
 function toggle
-  if test -e $marker
-    rm -f $marker; and pkill -SIGRTMIN+5 waybar
-    killall -q rofi
-  else
-    touch $marker; and pkill -SIGRTMIN+5 waybar
-    killall -q rofi
+  set theme ~/.config/rofi/screenshot.rasi
+  set savepath (xdg-user-dir PICTURES)/screenshots
+  mkdir -p $savepath
 
-    # Options
-    set normal ""
-    set crop ""
+  killall -q rofi
 
-    # Variables passed to dmenu
-    set options "$normal\n$crop"
+  # Options
+  set normal ""
+  set crop ""
 
-    set opt (echo -e $options | rofi -dmenu -p "grim" -theme $theme)
+  # Variables passed to dmenu
+  set options "$normal\n$crop"
 
-    if test -z $opt
-      rm -f $marker; and pkill -SIGRTMIN+5 waybar
-      exit 0
-    end
+  set opt (echo -e $options | rofi -dmenu -p "grim" -theme $theme)
 
-    switch $opt
-      case $normal
-        grim $savepath/(date +%Y%m%d_%H%M%S.png)
-        notify-send "Screenshot All Monitor saved $savepath"
-      case $crop
-        grim -g (slurp) $savepath/(date +%Y%m%d_%H%M%S.png)
-        notify-send "Screenshot Crop Region saved $savepath"
-    end
+  if test -z $opt
+    exit 0
+  end
 
-    rm -f $marker; and pkill -SIGRTMIN+5 waybar
+  switch $opt
+    case $normal
+      grim $savepath/(date +%Y%m%d_%H%M%S.png)
+      notify-send "Screenshot All Monitor saved $savepath"
+    case $crop
+      grim -g (slurp) $savepath/(date +%Y%m%d_%H%M%S.png)
+      notify-send "Screenshot Crop Region saved $savepath"
   end
 end
 
 switch $argv[1]
   case ''
-    markup
-  case toggle
     toggle
 end

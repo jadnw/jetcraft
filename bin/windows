@@ -1,51 +1,35 @@
 #!/bin/fish
 
-set marker /tmp/waybar-windows
-set theme ~/.config/rofi/configs/windows.rasi
-
-function markup
-  if test -e $marker
-    echo '{ "text": "", "tooltip": "Close Overlay", "class": "windows-active" }'
-  else
-    echo '{ "text": "", "tooltip": "Windows", "class": "windows" }'
-  end
-end
-
 function toggle
-  if test -e $marker
-    rm -f $marker; and pkill -SIGRTMIN+9 waybar
-    killall -q rofi
-  else
-    touch $marker; and pkill -SIGRTMIN+9 waybar
-    killall -q wofi
+  set theme ~/.config/rofi/windows.rasi
 
-    set windows (swaymsg -t get_tree | jq -r '
-      recurse(.nodes[]?) |
-        recurse(.floating_nodes[]?) |
-        select(.type=="con"), select(.type=="floating_con") |
-          (.id | tostring) + " " + .app_id + ": " + .name')
+  killall -q rofi
 
-    if test (count $windows) -eq 0
-      exit 0
-    end
+  set windows (string trim -l (string replace "title: " "" (hyprctl clients | grep title)))
+  set pids (string trim -l (string replace "pid: " "" (hyprctl clients | grep pid)))
 
-    set options (string join "\n" $windows)
+  for i in (seq (count $windows))
+    set pid_windows[$i] "$pids[$i]  $windows[$i]"
+  end
 
-    set opt (echo -e $options | rofi -dmenu -p "Windows" -theme $theme)
-
-    if test -z $opt
-      rm -f $marker; and pkill -SIGRTMIN+9 waybar
-      exit 0
-    end
-
-    swaymsg [con_id="$opt"] focus
+  if test (count $pid_windows) -eq 0
     exit 0
   end
+
+  set options (string join "\n" $pid_windows)
+
+  set opt (echo -e $options | rofi -dmenu -p "Windows" -theme $theme)
+
+  if test -z $opt
+    exit 0
+  end
+
+  set focus_pid (string split "  " $opt)[1]
+  hyprctl dispatch focuswindow pid:$focus_pid
+  exit 0
 end
 
 switch $argv[1]
   case ''
-    markup
-  case toggle
     toggle
 end
