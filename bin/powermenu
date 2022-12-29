@@ -1,6 +1,6 @@
 #!/bin/fish
 
-set theme ~/.config/rofi/power.rasi
+set theme ~/.config/rofi/powermenu.rasi
 set uptime (uptime -p | sed -e 's/up //g')
 
 function toggle

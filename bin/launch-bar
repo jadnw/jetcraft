@@ -7,8 +7,7 @@ function run_eww
   eww daemon
   set pid (pgrep eww)
   if test -n "$pid"
-    # GTK_DEBUG=interactive eww --config "$config" --debug open bar --screen 0
-    eww --config "$config" --debug open bar --screen 0
+    GTK_DEBUG=interactive eww --config "$config" --debug open bar --screen 0
   end
 end
 
