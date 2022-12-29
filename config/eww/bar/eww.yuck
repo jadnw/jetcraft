@@ -141,7 +141,7 @@
 (defwindow bar
   :monitor 0
   :windowtype "dock"
-  :stacking "overlay"
+  :stacking "fg"
   :geometry (geometry :width "100%" :anchor "bottom center")
   :exclusive true
   (box :class "bar-wrapper" :space-evenly "true"
