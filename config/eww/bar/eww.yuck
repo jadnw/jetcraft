@@ -8,18 +8,10 @@
 )
 
 ; Clock
-(defpoll year :interval "60s"
-	`date +"%Y"`)
-(defpoll month :interval "60s"
-	`date +"%m"`)
-(defpoll day :interval "60s"
-	`date +"%d"`)
 (defpoll hour :interval "60s"
 	`date +"%H"`)
 (defpoll min :interval "60s"
 	`date +"%M"`)
-
-(defvar date false)
 
 (defwidget clock [hour min]
   (eventbox :class "clock" :onclick "alacritty -e btop"
@@ -30,9 +22,9 @@
   )
 )
 
-; Applications Launcher
+; Dashboard Launcher
 (defwidget launcher []
-  (box :space-evenly "false" (button :class "launcher" :onclick "~/.local/bin/launcher" :tooltip "Applications" ""))
+  (box :space-evenly "false" (button :class "launcher" :onclick "" :tooltip "Dashboard" ""))
 )
 
 ; Power Menu
@@ -124,17 +116,29 @@
 (defvar nightlight_icon "")
 
 (defwidget nightlight []
-  (box :space-evenly "false" (button :class "nightlight" :onclick "~/.local/bin/nightlight" :tooltip "Night Light" "${nightlight_icon}"))
+  (box :space-evenly "false" (button :class "nightlight" :onclick "~/.local/bin/nightlight" :tooltip "Nightlight" "${nightlight_icon}"))
+)
+
+; Idle Inhibitor
+(defvar idle_icon "")
+
+(defwidget idle_inhibitor []
+  (box :space-evenly "false" (button :class "idle-inhibitor" :onclick "~/.local/bin/idle toggle" :tooltip "Idle Inhibitor" "${idle_icon}"))
+)
+
+; Applications Launcher
+(defwidget app_launcher []
+  (box :space-evenly "false" (button :class "app-launcher" :onclick "~/.local/bin/launcher" :tooltip "Applications" ""))
 )
 
 ; Right System Icons
 (defwidget rightsys []
-  (box :space-evenly false :spacing 4 (volume) (network) (nightlight))
+  (box :space-evenly false :spacing 4 (volume) (network) (idle_inhibitor) (nightlight))
 )
 
 ; Left System Icons
 (defwidget leftsys []
-  (box :space-evenly false :spacing 4 (zathura) (sysmonitor) (recording_indicator))
+  (box :space-evenly false :spacing 4 (app_launcher) (zathura) (sysmonitor) (recording_indicator))
 )
 
 ; Status Bar

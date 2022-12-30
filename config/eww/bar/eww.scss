@@ -4,7 +4,7 @@
   all: unset;
 }
 
-#tooltip {
+.tooltip {
   background-color: $bg1;
   color: $accent;
 }
@@ -131,14 +131,6 @@ scale trough {
   font-weight: 800;
 }
 
-.zathura {
-  padding: 4px;
-  font-family: Material Icons Round;
-  font-size: 18px;
-  background-color: $magenta;
-  color: $bg1;
-  border-radius: 4px;
-}
 
 .recording {
   padding: 4px;
@@ -155,20 +147,34 @@ scale trough {
   font-weight: 800;
 }
 
-.network {
+.app-launcher,
+.network,
+.nightlight,
+.idle-inhibitor,
+.zathura {
   padding: 4px;
   font-family: Material Icons Round;
   font-size: 18px;
-  background-color: $blue;
   color: $bg1;
   border-radius: 4px;
 }
 
+.app-launcher {
+  background-color: cyan;
+}
+
+.network {
+  background-color: $blue;
+}
+
 .nightlight {
-  padding: 4px;
-  font-family: Material Icons Round;
-  font-size: 18px;
   background-color: $yellow;
-  color: $bg1;
-  border-radius: 4px;
+}
+
+.idle-inhibitor {
+  background-color: $purple;
+}
+
+.zathura {
+  background-color: $magenta;
 }

@@ -28,9 +28,9 @@ function toggle
     case $reboot
       reboot
     case $logout
-      swaymsg exit
+      hyprctl dispatch exit 0
     case $lock
-      swaylock
+      ~/.local/bin/launch-lock &
     case $suspend
       systemctl suspend
   end
